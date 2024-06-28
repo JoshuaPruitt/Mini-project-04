@@ -76,6 +76,7 @@ addTextBtn.addEventListener('click', function () {
 
 function attachMouseListeners() {
   // TODO: Attach the mouse move event listener to the document and the click listener to the mood board div so that the element can be dragged anywhere on the screen, but dropped only on the mood board div.
+  addEventListener('click', placeElementClickHandler(MouseEvent()))
 }
 
 // ? This is the event handler for the mouse move event. This will be called whenever the mouse is moved on the screen.
@@ -92,10 +93,10 @@ function mouseMoveHandler(event) {
 // ? When we click, we find the position of the mouse relative to the mood board and update the position of the element accordingly. to 'place' it on the mood board.
 function placeElementClickHandler(event) {
   if (currentElement) {
-    // TODO: Explain what getBoundingClientRect() does
+    // it grabs the x and y position of the moodboard and it's relative positition to the viewport
     const moodBoardRect = moodBoardEl.getBoundingClientRect();
 
-    // TODO: Explain what the following code does
+    // it minuses the mouse x and y by the relative x and y of the mood board
     const left = `${event.clientX - moodBoardRect.left}px`;
     const top = `${event.clientY - moodBoardRect.top}px`;
 
