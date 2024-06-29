@@ -51,9 +51,12 @@ function loadFromLocalStorage() {
     // TODO: Paint the stored text to the mood board
     tempStorageObject.text.forEach((text) => {
       const tex = document.createElement('div');
-      tex.textContent = text;
+      console.log(text);
+      tex.textContent = text.text;
+      // sets each inputs positon
       tex.style.left = text.left;
       tex.style.top = text.top;
+      // makes the text draggable and appends to the board
       tex.classList.add('draggable')
       moodBoardEl.appendChild(tex);
     });
