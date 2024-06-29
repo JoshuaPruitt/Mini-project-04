@@ -17,6 +17,12 @@ let currentElement = null;
 
 clearBtn.addEventListener('click', function () {
   // TODO: Clear the local storage and refresh the page
+  // clear all inputs inside of the tempStorageObject
+  tempStorageObject = {
+    images: [],
+    text: [],
+  };
+  
 });
 
 function updateLocalStorage() {
@@ -49,8 +55,13 @@ addImageBtn.addEventListener('click', function () {
   const imageUrl = imageUrlInput.value;
   if (imageUrl) {
     // TODO: Create an image element, add a class of draggable, set the src attribute to the image URL provided by the user, and append it to the body element
-
+    const imageDiv = document.createElement('div');
+    imageDiv.classList.add('draggable');
+    imageDiv.src = imageUrl;
+    document.body.appendChild(imageDiv);
+    
     // TODO: Set the `currentElement` to the image element you create.
+    currentElement = imageDiv;
 
     // ? We attach the mouse move event listener to the document and the mood board div so that the element can be dragged anywhere on the screen and dropped only on the mood board div.
     attachMouseListeners();
@@ -76,7 +87,9 @@ addTextBtn.addEventListener('click', function () {
 
 function attachMouseListeners() {
   // TODO: Attach the mouse move event listener to the document and the click listener to the mood board div so that the element can be dragged anywhere on the screen, but dropped only on the mood board div.
-  addEventListener('click', placeElementClickHandler(MouseEvent()))
+  document.addEventListener('mousemove', mouseMoveHandler)
+
+  moodBoardEl.addEventListener('click', placeElementClickHandler)
 }
 
 // ? This is the event handler for the mouse move event. This will be called whenever the mouse is moved on the screen.
