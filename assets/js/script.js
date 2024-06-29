@@ -27,11 +27,13 @@ clearBtn.addEventListener('click', function () {
 
 function updateLocalStorage() {
   // TODO: Update the local storage with the tempStorageObject
+  localStorage.setItem('storedData', JSON.stringify(tempStorageObject))
 }
 
 // ? Function to load from local storage. This function will be called on page load.
 function loadFromLocalStorage() {
   // TODO: Load and parse the data from local storage and paint the images and text on the mood board
+  const storedData = JSON.parse(localStorage.getItem('storedData'));
 
   if (storedData) {
     tempStorageObject = storedData;
@@ -47,15 +49,25 @@ function loadFromLocalStorage() {
     });
 
     // TODO: Paint the stored text to the mood board
+    tempStorageObject.text.forEach((text) => {
+      const tex = document.createElement('div');
+      tex.textContent = text;
+      tex.style.left = text.left;
+      tex.style.top = text.top;
+      tex.classList.add('draggable')
+      moodBoardEl.appendChild(tex);
+    });
+
   }
-}
+};
+
 
 //  ? We create an event listener for the image URL input field. This will create an image element and attach it to the mood board with the URL provided by the user.
 addImageBtn.addEventListener('click', function () {
   const imageUrl = imageUrlInput.value;
   if (imageUrl) {
     // TODO: Create an image element, add a class of draggable, set the src attribute to the image URL provided by the user, and append it to the body element
-    const imageDiv = document.createElement('div');
+    const imageDiv = document.createElement('img');
     imageDiv.classList.add('draggable');
     imageDiv.src = imageUrl;
     document.body.appendChild(imageDiv);
