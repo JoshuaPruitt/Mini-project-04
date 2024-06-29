@@ -22,11 +22,15 @@ clearBtn.addEventListener('click', function () {
     images: [],
     text: [],
   };
-  
+
+  //run update local storage to remove items. Reload the page
+  updateLocalStorage();
+  location.reload()
 });
 
 function updateLocalStorage() {
   // TODO: Update the local storage with the tempStorageObject
+  console.log(tempStorageObject)
   localStorage.setItem('storedData', JSON.stringify(tempStorageObject))
 }
 
@@ -34,6 +38,7 @@ function updateLocalStorage() {
 function loadFromLocalStorage() {
   // TODO: Load and parse the data from local storage and paint the images and text on the mood board
   const storedData = JSON.parse(localStorage.getItem('storedData'));
+  console.log(storedData)
 
   if (storedData) {
     tempStorageObject = storedData;
@@ -51,7 +56,6 @@ function loadFromLocalStorage() {
     // TODO: Paint the stored text to the mood board
     tempStorageObject.text.forEach((text) => {
       const tex = document.createElement('div');
-      console.log(text);
       tex.textContent = text.text;
       // sets each inputs positon
       tex.style.left = text.left;
